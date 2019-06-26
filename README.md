@@ -1,20 +1,21 @@
 # language
 
-Differences between American and English words
+ENGLISH LANGUAGE:-
 
+I want to maintain a CSV database of
+ - English UK-US (differences between American and English words)
+ - English Interesting words (ones I had to look up the meaning of)
 
-I'm going to write a simple program that can append to the database.
-Then I will use my program, to digitise a list of words I have on paper.
-
-I aim to make a GUI to easily consult my database while I am writing.
+I'm going to write a simple program that can append to these CSVs.
+Then I will use my program, to digitise my various lists of these.
+I aim to make a GUI to easily consult my database at any time.
 Stretch goal is for the GUI to edit the database online.
 
 
+FOREIGN LANGUAGES:-
 
+I want to incorporate my digital and paper databases of
+- Spanish
+- Dutch
 
-
-English Uk-us
-English Interesting words
-Spanish databases
-Dutch databases
-Connections between eng/span/dutch
+And finally portray interesting links between English, and these.

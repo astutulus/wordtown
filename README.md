@@ -2,9 +2,9 @@
 
 ENGLISH LANGUAGE:-
 
-I want to maintain a CSV database of
- - English UK-US (differences between American and English words)
- - English Interesting words (ones I had to look up the meaning of)
+Database project for interesting words that I had to look up
+- Beginning with English UK-US differences
+- Following with harder words and their definitions
 
 I'm going to write a simple program that can append to these CSVs.
 Then I will use my program, to digitise my various lists of these.

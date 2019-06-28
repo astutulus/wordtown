@@ -62,15 +62,15 @@ def read_file_to_database():
 
 # PROGRAM LOGIC
 
-read_file_to_database()
-print_database ()
 
-another = input('Enter a pair in the form "uk,us" or enter q to quit: ')
-if another == "q":
-	print ('goodbye')
-else:
+while True:	
+	read_file_to_database()
+	print_database ()
+	another = input('Enter a pair in the form "uk,us" or enter q to quit: ')
+	if another == "q":		
+		break
 	add_to_database(another)
 	clear_file ()
 	write_file ()
-	read_file_to_database()
-	print_database ()
+
+print ('goodbye')

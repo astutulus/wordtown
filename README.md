@@ -3,13 +3,11 @@
 ENGLISH LANGUAGE:-
 
 Database project for interesting words that I had to look up
-- Beginning with English UK-US differences
-- Following with harder words and their definitions
+- English UK-US differences
+- Definitions of obscure words that people say to me
 
 I'm going to write a simple program that can append to these CSVs.
-Then I will use my program, to digitise my various lists of these.
-I aim to make a GUI to easily consult my database at any time.
-Stretch goal is for the GUI to edit the database online.
+I will use my program to manually digitise my lists of these.
 
 
 FOREIGN LANGUAGES:-

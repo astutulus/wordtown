@@ -12,12 +12,12 @@ db = database.LanguageDB(DATA_PATH)
 while True:
 	db.print_database()
 
-	another = input('Enter a pair in the form "uk,us" or enter q to quit: ')
-	if another == "q":
+	suggestion = input('Enter a pair in the form "uk,us" or enter q to quit: ')
+	if suggestion == "q":
 		print ('goodbye')
 		break
 	else:
-		db.add_to_database(another)
+		db.add_to_database(suggestion)
 		if db.backup_file():
 			print ("Backed up")
 			db.write_file()

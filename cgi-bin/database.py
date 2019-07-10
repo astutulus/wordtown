@@ -3,21 +3,16 @@ In MVC, these low level nuts and bolts are Model
 '''
 import os
 import filechooser
+import word
 
 class LanguageDB (str):
 
 	def __init__(self, directory):
-		list.__init__([])
 		self.filepath = filechooser.userchoice(directory)
-		self.languagedb = set() # set of word tuples
-		self.column1 = ""       # column title - to do detection of first line
-		self.column2 = ""       # column title
-		self.initialise()
+		self.languagedb = set()
+		self.columnheads = []
 
-	# ------------------ FILE READING ------------------
-
-	def initialise (self):
-		try:        
+		try:
 			file = open(self.filepath, 'r')
 			lines = file.readlines()
 
@@ -41,16 +36,15 @@ class LanguageDB (str):
 	# Takes a tuple to be added
 	# Returns nothing
 	def read_header_row (self, entry):
-		(title1, title2) = entry.split(",", 1)  	# max splits is one
-		self.column1 = title1.rstrip()
-		self.column2 = title2.rstrip()
+		headers = entry.split(",")
+		for h in headers:
+			h = h.rstrip()
+			self.columnheads.append(h)
+		print (self.columnheads)
 
-	# Takes a tuple to be added
-	# Returns nothing
+	# Piggybacks existing method
 	def read_data_row (self, entry):
-		(item1, item2) = entry.split(",", 1)  	# max splits is one
-		new_entry = (item1.rstrip(), item2.rstrip())
-		self.languagedb.add(new_entry)
+		self.add_to_database(entry)
 
 	# ------------------ VISUALISATION ------------------
 
@@ -65,27 +59,37 @@ class LanguageDB (str):
 	# returns nothing                    	# for numbers format as {:32d}
 	def print_database (self):
 		rule = 26
-		print("{:32} {:32}".format(self.horiz(rule), self.horiz(rule)))							
-		print("{:32} {:32}".format(self.column1, self.column2))
+		print("{:32} {:32}".format(self.horiz(rule), self.horiz(rule)))
+		print("{:32} {:32}".format(self.columnheads[0], self.columnheads[1]))
 		print("{:32} {:32}".format(self.horiz(rule), self.horiz(rule)))
 		for eachEntry in self.languagedb:
-			print("{:32} {:32}".format(eachEntry[0], eachEntry[1]))
+			firstWord = eachEntry[0].word
+			secondword = eachEntry[1].word
+			print("{:32} {:32}".format(firstWord, secondword))
 		print("{:32} {:32}".format(self.horiz(rule), self.horiz(rule)))
-	
+
 	# ------------------ EDIT DATABASE ------------------
 
-	def add_to_database (self, new_row):
-		self.read_data_row(new_row)
+	# Takes a tuple to be added
+	def add_to_database (self, entry):
+		(itemA, itemB) = entry.split(",", 1)  	# max splits is one
+		word1 = word.Word (self.columnheads[0], itemA.rstrip())
+		word2 = word.Word (self.columnheads[1], itemB.rstrip())
+		new_entry = (word1, word2)
+		self.languagedb.add(new_entry)
+
 
 	# ------------------ FILE WRITING ------------------
 
 	def write_file(self):
-		self.append_line([self.column1, self.column2])
+		self.append_line([self.columnheads[0], self.columnheads[1]])
 		for line in self.languagedb:
-			self.append_line(line)
+			wordX = line[0].word
+			wordY = line[1].word
+			self.append_line([wordX,wordY])
 
 	def append_line(self, line):
-		try:        
+		try:
 			with open(self.filepath, 'a') as out_dict:	#  'a' append   'w' overWrite
 				print(line[0] + "," + line[1], file=out_dict)
 		except IOError as err:
@@ -95,7 +99,7 @@ class LanguageDB (str):
 		if os.path.exists(self.filepath + ".bak"):
 			self.delete_file(self.filepath + ".bak")
 			print ("Deleted previous backup")
-		try:        
+		try:
 			os.rename(self.filepath, self.filepath + ".bak")
 			print ("Made new backup")
 			return True
